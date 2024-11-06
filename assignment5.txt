@@ -1,0 +1,76 @@
+//1
+db.students.find( { grade: { $ne: "A" } },{ name: 1, grade: 1, _id: 0 })
+
+//2
+db.students.find( { age: { $lt: 18 } },{ name: 1, age: 1, class: 1, _id: 0 }) 
+
+
+//3
+db.createCollection("employees")
+db.employees.insertMany([
+  {employee_id: 1, name: "John", department: "Engineering", experience: 12},
+  {employee_id: 2, name: "Jane", department: "HR", experience: 5},
+  {employee_id: 3, name: "Alice", department: "Finance", experience: 15},
+  {employee_id: 4, name: "Bob", department: "Engineering", experience: 8},
+  {employee_id: 5, name: "Carol", department: "Sales", experience: 20}
+])
+db.employees.find({experience: {$gt: 10}}, {name: 1, department: 1, _id: 0})
+
+
+//4
+db.createCollection("courses");
+db.courses.insertMany([
+  {course_name: "Math", instructor: "Prof. Smith", duration: 10},
+  {course_name: "Physics", instructor: "Prof. Johnson", duration: 15},
+  {course_name: "Chemistry", instructor: "Prof. Lee", duration: 12}
+])
+db.courses.find({duration: {$gte: 12}}, {course_name: 1, instructor: 1, _id: 0});
+
+
+//5
+db.createCollection("inventory");
+db.inventory.insertMany([
+  {item_name: "Notebook", price: 20, stock: 100},
+  {item_name: "Laptop", price: 800, stock: 50},
+  {item_name: "Pen", price: 2, stock: 500},
+  {item_name: "Backpack", price: 50, stock: 30}
+])
+db.inventory.find({price: {$lte: 100}}, {item_name: 1, price: 1, _id: 0})
+
+
+//6
+db.students.insertMany([
+  {name: "Alice", age: 17, class: "12th", roll: 499, department: "Biology", grade: "B"},
+  {name: "Bob", age: 19, class: "College", roll: 502, department: "Physics", grade: "A"},
+  {name: "Charlie", age: 21, class: "College", roll: 503, department: "Chemistry", grade: "B"},
+  {name: "David", age: 16, class: "11th", roll: 504, department: "Maths", grade: "C"}
+])
+db.students.find({name: {$in: ["Alice", "Bob", "Charlie"]}}, {name: 1, roll: 1, _id: 0})
+
+
+//7
+db.createCollection("library");
+db.library.insertMany([
+  {title: "Intro to Algorithms", author: "Cormen", pages: 300},
+  {title: "Biology 101", author: "Smith", pages: 150},
+  {title: "Data Structures", author: "McGraw", pages: 450}
+])
+db.library.find({pages: {$gt: 150, $lt: 500}}, {title: 1, pages: 1, _id: 0})
+
+
+//8
+db.employees.find({department: {$ne: "HR"}, salary: {$gt: 60000}}, {name: 1, salary: 1, _id: 0});
+
+
+//9
+db.createCollection("orders");
+db.orders.insertMany([
+  {order_id: 1, status: "completed", total_amount: 150},
+  {order_id: 2, status: "in progress", total_amount: 300},
+  {order_id: 3, status: "pending", total_amount: 200}
+])
+db.orders.find({status: {$in: ["completed", "in progress"]}}, {order_id: 1, status: 1, _id: 0})
+
+
+//10
+db.students.find({roll: {$gte: 500}, department: {$in: ["Biology", "Chemistry", "Physics"]}}, {name: 1, roll: 1, department: 1, _id: 0});
