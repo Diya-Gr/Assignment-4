@@ -1,0 +1,41 @@
+//1
+db.employees.updateOne({name: "John"}, {$set: {age: 35}})
+db.employees.updateOne({name: "Jane"}, {$set: {age: 30}})
+db.employees.updateOne({name: "Alice"}, {$set: {age: 45}})
+db.employees.updateOne({name: "Bob"}, {$set: {age: 29}})
+db.employees.updateOne({name: "Carol"}, {$set: {age: 40}})
+
+db.employees.find({$or: [{age: {$gt: 30}}, {experience: {$gt: 5}}]})
+
+
+
+//2
+db.createCollection("products")
+db.products.insertMany([
+    {product_name: "Laptop", stock: 10, price: 1200},
+    {product_name: "Headphones", stock: 50, price: 30},
+    {product_name: "Notebook", stock: 100, price: 5},
+    {product_name: "Mouse", stock: 0, price: 15},
+    {product_name: "Keyboard", stock: 15, price: 45}
+])
+db.products.find({stock: {$gt: 0}, price: {$lt: 50}})
+
+
+
+//3
+db.students.updateOne({name: "diya"}, {$set: {enrolled: true, exam_score: 75}})
+db.students.updateOne({name: "geetika"}, {$set: {enrolled: true, exam_score: 90}})
+db.students.updateOne({name: "sam"}, {$set: {enrolled: false, exam_score: 65}})
+db.students.updateOne({name: "john"}, {$set: {enrolled: true, exam_score: 45}})
+
+db.students.find({$or: [{enrolled: false}, {grade: {$lt: "C"}}]})
+
+
+//4
+db.courses.updateMany({}, {$set: {duration: 3, instructor: ""}})
+db.courses.updateMany({}, {$set: {duration: 5, instructor: "Prof.W"}})
+db.courses.find({$or: [{duration: {$lt: 6}}, {instructor: {$exists: false}}]})
+
+
+//5
+
