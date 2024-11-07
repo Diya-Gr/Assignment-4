@@ -31,11 +31,63 @@ db.students.updateOne({name: "john"}, {$set: {enrolled: true, exam_score: 45}})
 db.students.find({$or: [{enrolled: false}, {grade: {$lt: "C"}}]})
 
 
+
 //4
 db.courses.updateMany({}, {$set: {duration: 3, instructor: ""}})
 db.courses.updateMany({}, {$set: {duration: 5, instructor: "Prof.W"}})
 db.courses.find({$or: [{duration: {$lt: 6}}, {instructor: {$exists: false}}]})
 
 
+
 //5
+db.createCollection("orders")
+db.orders.insertMany([
+  {order_id: 1, status: "completed", total_amount: 150, shipped_date: "2024-11-01"},
+  {order_id: 2, status: "in progress", total_amount: 300, shipped_date: null},
+  {order_id: 3, status: "pending", total_amount: 200},
+  {order_id: 4, status: "shipped", total_amount: 120, shipped_date: "2024-11-05"},
+  {order_id: 5, status: "in progress", total_amount: 250}
+])
+db.orders.find({$or: [{status: {$ne: "shipped"}}, {shipped_date: {$exists: false}}]})
+
+
+
+//6
+db.employees.find({department: {$nin: ["Engineering", "IT"]}}, {name: 1, department: 1, _id: 0})
+
+
+
+//7
+db.students.updateOne({name: "diya"}, {$set: {enrolled: true, exam_score: 75, participation: true}});
+db.students.updateOne({name: "geetika"}, {$set: {enrolled: true, exam_score: 90, participation: true}});
+db.students.updateOne({name: "sam"}, {$set: {enrolled: false, exam_score: 65, participation: false}});
+db.students.updateOne({name: "john"}, {$set: {enrolled: true, exam_score: 45, participation: false}});
+
+db.students.find({exam_score: {$lt: 50}, participation: false})
+
+
+
+//8
+db.employees.find({$and: [{department: "Sales"}, {$or: [{experience: {$gt: 3}}, {age: {$lt: 25}}]}]})
+
+
+
+//9
+db.createCollection("inventory")
+db.inventory.insertMany([
+  {item_name: "Notebook", price: 20, stock: 100},
+  {item_name: "Laptop", price: 800, stock: 50},
+  {item_name: "Pen", price: 2, stock: 500},
+  {item_name: "Backpack", price: 50, stock: 30},
+  {item_name: "Eraser", price: 1}, 
+  {item_name: "Marker", price: 120, stock: 200},
+  {item_name: "Chalk", price: 3, stock: 0} 
+])
+
+
+
+//10
+db.courses.find({$and:[{instructor:{$ne:"John Smith"}},{duration:{$lte:10}}]})
+
+
 
